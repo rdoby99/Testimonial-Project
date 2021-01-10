@@ -1,7 +1,7 @@
 # Testimonial-Project
 Idea from JS-Beginners at https://github.com/JS-Beginners/testimonial-project.git
 
-HTML&CSS not mine. JS file contains my own code, created WITHOUT looking at the solution.
+HTML&CSS not mine. The app.js file contains my own code, created WITHOUT looking at the solution.
 
 ## What I Learned
 
