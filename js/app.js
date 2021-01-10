@@ -1,59 +1,53 @@
-(function(){
-    const customerImage = document.querySelector('#customer-img')
-    const customerName = document.querySelector('#customer-name')
-    const customerText = document.querySelector('#customer-text')
-    const buttons = document.querySelectorAll('.btn')
-    let index = 0
-    const customers = []
+(function() {
+    const btns = document.querySelectorAll(".btn");
+    const customerImage = document.querySelector("#customer-img");
+    const customerName = document.querySelector("#customer-name");
+    const customerText = document.querySelector("#customer-text");
+    let counter = 0;
 
-    //Create a new customer using a customer constructor
-    
-    //Customer Constructor
-    function Customer(img, name, text) {
-        this.img = img
-        this.name = name
-        this.text = text
-    }
+    class Customers {
+        constructor(name, image, review) {
+            this.name = name;
+            this.image = image;
+            this.review = review;
+        }
+    };
 
-    //Create new customer using the constructor function
+    let billy = new Customers('Billy Bob', 'customer-0', 'They never said winning was easy. Some people can’t handle success, I can. The other day the grass was brown, now it’s green because I ain’t give up.');
 
-    function createCustomer(img, name, text) {
+    let jake = new Customers('Jake', 'customer-1', 'Never surrender. They key is to have every key, the key to open every door. Every chance I get, I water the plants, Lion! Surround yourself with angels, positive energy, beautiful people, beautiful souls, clean heart, angel. ' );
 
-        let fullImg = `./img/customer-${img}.jpg`
-        let customer = new Customer(fullImg, name, text)
+    let brian = new Customers('Brian', 'customer-2', 'The best. How’s business? Boomin. The ladies always say Khaled you smell good, I use no cologne. Cocoa butter is the key.');
 
-        customers.push(customer)
-    }
+    let joe = new Customers('Joe', 'customer-3', 'Egg whites, turkey sausage, wheat toast, water. Of course they don’t want us to eat our breakfast, so we are going to enjoy our breakfast. We don’t see them, we will never see them. Stay focused.');
 
-    
-    createCustomer(0, 'John', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis neque reprehenderit laborum, corporis explicabo assumenda. Porro impedit consectetur animi, reprehenderit recusandae sapiente at aliquam reiciendis modi ipsam rerum suscipit distinctio?')
-    createCustomer(1, 'Sandy', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock')
-    createCustomer(2, 'Amy', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable.')
-    createCustomer(3, 'Tyrell', 'If you are going to use a passage of Lorem Ipsum, you need to be sure there isn\'t anything embarrassing hidden in the middle of text.')
-    createCustomer(4, 'Wanda', 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.')
-    
+    let jerome = new Customers('Jerome', 'customer-4', 'They key is to have every key, the key to open every door. I’m giving you cloth talk, cloth. Special cloth alert, cut from a special cloth. ');
 
-    buttons.forEach(function(button){
-        button.addEventListener('click', function(e){
-            if (e.target.parentElement.classList.contains('prevBtn')){
-               if(index === 0){
-                    index = customers.length
-               }
-               index--
-               customerImage.src = customers[index].img
-               customerName.textContent = customers[index].name
-               customerText.textContent = customers[index].text
-            }
-            if (e.target.parentElement.classList.contains('nextBtn')){
-                index++
-                if(index === customers.length){
-                     index = 0
+    const customerArray = [billy, jake, brian, joe, jerome];
+
+    customerName.textContent = customerArray[counter].name;
+    customerText.textContent = customerArray[counter].review;
+
+
+    btns.forEach(function(button){
+        button.addEventListener('click', function(e) {
+            if (button.classList.contains('prevBtn')) {
+                counter--;
+                if (counter < 0) {
+                    counter = customerArray.length -1;
                 }
-                customerImage.src = customers[index].img
-                customerName.textContent = customers[index].name
-                customerText.textContent = customers[index].text
-             }
+                customerImage.src = "./img/" + customerArray[counter].image + ".jpg";
+                customerText.textContent = customerArray[counter].review;
+                customerName.textContent = customerArray[counter].name;
+            } else {
+                counter++;
+                if (counter > customerArray.length -1) {
+                    counter = 0;
+                }
+                customerImage.src = "./img/" + customerArray[counter].image + ".jpg";
+                customerText.textContent = customerArray[counter].review;
+                customerName.textContent = customerArray[counter].name;
+            }
         })
     })
-    
-})()
+})();
